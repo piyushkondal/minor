@@ -37,7 +37,7 @@ class UserServices {
       // console.log(userCreed.user.uid);
       // getDoc
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
