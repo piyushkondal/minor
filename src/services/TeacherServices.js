@@ -1,4 +1,5 @@
 import {
+  setDoc,
   addDoc,
   collection,
   deleteDoc,
@@ -7,23 +8,32 @@ import {
   query,
   updateDoc,
 } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { TeacherModel } from "../model/TeacherModel";
-import { db } from "../firebase";
+import { UserModel } from "../model/UserModel";
+import { db, auth } from "../firebase";
 
-const dbpath = "users";
+const dbpath = "Teacher";
 
 class TeacherServices {
   async Add(data) {
     console.log(data);
 
     try {
+      let userCreed = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password,
+      );
+      let uid = userCreed.user.uid;
       let obj = new TeacherModel();
       obj.TeacherName = data.TeacherName;
       obj.TeacherID = data.TeacherId;
       obj.Email = data.email;
       obj.Password = data.password;
-      await addDoc(collection(db, dbpath), { ...obj });
+      await setDoc(doc(db, dbpath, uid), { ...obj });
 
+      await setDoc(doc(db, "users", uid), { ...obj });
       return 1;
     } catch (err) {
       console.log(err);
