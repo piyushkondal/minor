@@ -9,7 +9,7 @@ const UpdateMaterial = () => {
   const [SubjectName, setSubjectName] = useState("");
   const [Title, setTitle] = useState("");
   const [FileUrl, setFileUrl] = useState("");
-  const [UploadedBy, setUploadedBy] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
 
   const { id } = useParams();
 
@@ -26,7 +26,7 @@ const UpdateMaterial = () => {
 
     setFileUrl(data.FileUrl);
 
-    setUploadedBy(data.UploadedBy);
+    setTeacherID(data.TeacherID);
   };
 
   const [load, setload] = useState(false);
@@ -44,7 +44,7 @@ const UpdateMaterial = () => {
 
       FileUrl: FileUrl,
 
-      UploadedBy: UploadedBy,
+      TeacherID: TeacherID,
     };
 
     console.log(data);
@@ -188,13 +188,13 @@ const UpdateMaterial = () => {
 
                         <div className="col-xl-8 my-2">
                           <input
-                            name="UploadedBy"
-                            value={UploadedBy}
+                            name="TeacherID"
+                            value={TeacherID}
                             onChange={(e) => {
-                              setUploadedBy(e.target.value);
+                              setTeacherID(e.target.value);
                             }}
                             type="text"
-                            placeholder="Uploaded By"
+                            placeholder="TeacherID"
                             className="contact_input"
                           />
                         </div>

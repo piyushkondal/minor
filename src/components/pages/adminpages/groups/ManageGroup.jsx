@@ -218,6 +218,7 @@ const ManageGroup = () => {
                                         <th scope="col">Category Name</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Image</th>
+                                        <th scope="col">TeacherID</th>
                                         <th scope="col">Update</th>
                                         <th scope="col">Delete</th>
                                         <th scope="col">create at</th>
@@ -233,6 +234,7 @@ const ManageGroup = () => {
                                                     <td>{el.GroupName}</td>
                                                     <td>{el.Description}</td>
                                                     <td><img src={el.image} width={100}></img></td>
+                                                    <td>{el.TeacherID}</td>
                                                     <td><Link class="btn btn-primary" to={"/admin/UpdateGroup/"+el.id}>Update</Link> </td>
                                                     <td><button 
                                                     onClick={() => {

@@ -10,6 +10,7 @@ const AddGroup = () => {
   const [description, setdescription] = useState("");
   const [image, setimage] = useState();
   const [id, setid] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
   const [Data, setData] = useState([]);
 
   const [load, setload] = useState(false);
@@ -32,6 +33,7 @@ const AddGroup = () => {
     let data = {
       name: name,
       id: id,
+      TeacherID: TeacherID,
       description: description,
       image: url,
     };
@@ -171,6 +173,18 @@ const AddGroup = () => {
                                 }}
                                 type="text"
                                 placeholder="Description"
+                                className="contact_input"
+                              />
+                            </div>
+                            <div className="col-xl-8 my-2">
+                              <input
+                                name="TeacherID"
+                                value={TeacherID}
+                                onChange={(e) => {
+                                  setTeacherID(e.target.value);
+                                }}
+                                type="text"
+                                placeholder="TeacherID"
                                 className="contact_input"
                               />
                             </div>

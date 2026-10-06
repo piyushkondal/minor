@@ -25,7 +25,7 @@ class NoticeServices {
       obj.Title = data.Title;
       obj.Description = data.Description;
       obj.FileUrl = data.FileUrl;
-      obj.PostedBy = data.PostedBy;
+      obj.TeacherID = data.TeacherID;
       // obj.Action= data.Action
 
       await addDoc(collection(db, dbPath), { ...obj });
@@ -49,7 +49,7 @@ class NoticeServices {
       obj.Title = data.Title;
       obj.Description = data.Description;
       obj.FileUrl = data.FileUrl;
-      obj.PostedBy = data.PostedBy;
+      obj.TeacherID = data.TeacherID;
       // obj.Action= data.Action
       await updateDoc(doc(db, dbPath, id), { ...obj });
 

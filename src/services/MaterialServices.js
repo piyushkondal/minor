@@ -25,7 +25,7 @@ class MaterialServices {
       obj.SubjectName = data.SubjectName;
       obj.Title = data.Title;
       obj.FileUrl = data.FileUrl;
-      obj.UploadedBy = data.UploadedBy;
+      obj.TeacherID = data.TeacherID;
       await addDoc(collection(db, dbPath), { ...obj });
 
       return 1;
@@ -47,7 +47,7 @@ class MaterialServices {
       obj.SubjectName = data.SubjectName;
       obj.Title = data.Title;
       obj.FileUrl = data.FileUrl;
-      obj.UploadedBy = data.UploadedBy;
+      obj.TeacherID = data.TeacherID;
       await updateDoc(doc(db, dbPath, id), { ...obj });
 
       return 1;

@@ -1,10 +1,9 @@
-export class MaterialsModel{
-    MaterialID=" ";
-    GroupId=" ";
-    SubjectName=" ";
-    Title=" ";
-    FileUrl=" ";
-    UploadedBy=" ";
-    createAt= new Date;
-    
+export class MaterialsModel {
+  MaterialID = " ";
+  GroupId = " ";
+  SubjectName = " ";
+  Title = " ";
+  FileUrl = " ";
+  TeacherID = " ";
+  createAt = new Date();
 }

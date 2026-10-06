@@ -4,7 +4,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDocs,
+  getDoc,
   query,
   updateDoc,
 } from "firebase/firestore";
@@ -90,6 +90,7 @@ class TeacherServices {
     try {
       let CateData = await getDoc(doc(db, dbpath, id));
       return CateData.data();
+      console.log(CateData.data());
     } catch (err) {
       console.log(err);
     }

@@ -206,6 +206,7 @@ const ManageAssignment = () => {
                         <th scope="col">SubjectName</th>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
+                        <th scope="col">TeacherID</th>
                         <th scope="col">image</th>
                         <th scope="col">DueDate</th>
                         <th scope="col">Update</th>
@@ -223,6 +224,7 @@ const ManageAssignment = () => {
                               <td>{el.SubjectName}</td>
                               <td>{el.Title}</td>
                               <td>{el.Description}</td>
+                              <td>{el.TeacherID}</td>
                               <td>
                                 <img src={el.image} width={100}></img>
                               </td>

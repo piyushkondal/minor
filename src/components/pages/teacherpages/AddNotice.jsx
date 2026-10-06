@@ -11,7 +11,7 @@ const AddNotice = () => {
   const [Description, setDescription] = useState("");
   const [Title, setTitle] = useState("");
   const [FileUrl, setFileUrl] = useState("");
-  const [PostedBy, setPostedBy] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
   const [Data, setData] = useState([]);
 
   const [load, setload] = useState(false);
@@ -35,7 +35,7 @@ const AddNotice = () => {
       Description: Description,
       Title: Title,
       FileUrl: FileUrl,
-      PostedBy: PostedBy,
+      TeacherID: TeacherID,
     };
 
     console.log(data);
@@ -184,10 +184,10 @@ const AddNotice = () => {
                             </div>
                             <div className="col-xl-8 my-2">
                               <input
-                                name="FileUrl"
-                                value={PostedBy}
+                                name="TeacherID"
+                                value={TeacherID}
                                 onChange={(e) => {
-                                  setPostedBy(e.target.value);
+                                  setTeacherID(e.target.value);
                                 }}
                                 type="text"
                                 placeholder="Posted by"

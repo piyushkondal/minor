@@ -12,7 +12,7 @@ const UpdateAssignment = () => {
   const [Description, setDescription] = useState("");
   const [FileUrl, setFileUrl] = useState("");
   const [DueDate, setDueDate] = useState("");
-  const [UploadedBy, setUploadedBy] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
 
   const { id } = useParams();
 
@@ -29,7 +29,7 @@ const UpdateAssignment = () => {
     setDescription(data.Description);
     setFileUrl(data.FileUrl);
     setDueDate(data.DueDate);
-    setUploadedBy(data.UploadedBy);
+    setTeacherID(data.TeacherID);
   };
 
   const [load, setload] = useState(false);
@@ -47,7 +47,7 @@ const UpdateAssignment = () => {
       Description: Description,
       FileUrl: FileUrl,
       DueDate: DueDate,
-      UploadedBy: UploadedBy,
+      TeacherID: TeacherID,
     };
 
     console.log(data);
@@ -212,13 +212,13 @@ const UpdateAssignment = () => {
                         </div>
                         <div className="col-xl-8 my-2">
                           <input
-                            name="UploadedBy"
-                            value={UploadedBy}
+                            name="TeacherID"
+                            value={TeacherID}
                             onChange={(e) => {
-                              setUploadedBy(e.target.value);
+                              setTeacherID(e.target.value);
                             }}
                             type="text"
-                            placeholder="Uploaded By"
+                            placeholder="TeacherID"
                             className="contact_input"
                           />
                         </div>

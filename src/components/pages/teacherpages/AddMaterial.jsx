@@ -11,7 +11,7 @@ const AddMaterial = () => {
   const [SubjectName, setSubjectName] = useState("");
   const [Title, setTitle] = useState("");
   const [FileUrl, setFileUrl] = useState("");
-  const [UploadedBy, setUploadedBy] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
   const [Data, setData] = useState([]);
 
   const [load, setload] = useState(false);
@@ -35,7 +35,7 @@ const AddMaterial = () => {
       SubjectName: SubjectName,
       Title: Title,
       FileUrl: FileUrl,
-      UploadedBy: UploadedBy,
+      TeacherID: TeacherID,
     };
 
     console.log(data);
@@ -255,10 +255,10 @@ const AddMaterial = () => {
                             </div>
                             <div className="col-xl-8 my-2">
                               <input
-                                name="UploadedBy"
-                                value={UploadedBy}
+                                name="TeacherID"
+                                value={TeacherID}
                                 onChange={(e) => {
-                                  setUploadedBy(e.target.value);
+                                  setTeacherID(e.target.value);
                                 }}
                                 type="text"
                                 placeholder="Uploaded By"

@@ -208,7 +208,7 @@ const ManageMaterial = () => {
                         <th scope="col">SubjectName</th>
                         <th scope="col">Title</th>
                         <th scope="col">FileUrl</th>
-                        <th scope="col">UploadedBy</th>
+                        <th scope="col">TeacherID</th>
                         <th scope="col">Update</th>
                         <th scope="col">Delete</th>
                       </tr>
@@ -224,7 +224,7 @@ const ManageMaterial = () => {
                               <td>{el.SubjectName}</td>
                               <td>{el.Title}</td>
                               <td>{el.FileUrl}</td>
-                              <td>{el.UploadedBy}</td>
+                              <td>{el.TeacherID}</td>
 
                               <td>
                                 <Link

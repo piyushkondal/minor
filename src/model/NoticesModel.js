@@ -1,10 +1,9 @@
-export class NoticesModel{
-    NoticeID=" ";
-    GroupId=" ";
-    Title=" ";
-    Description=" ";
-    FileUrl=" ";
-    PostedBy=" ";
-    createAt= new Date;
-    
+export class NoticesModel {
+  NoticeID = " ";
+  GroupId = " ";
+  Title = " ";
+  Description = " ";
+  FileUrl = " ";
+  TeacherID = " ";
+  createAt = new Date();
 }

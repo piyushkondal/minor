@@ -10,7 +10,7 @@ const UpdateNotice = () => {
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [FileUrl, setFileUrl] = useState("");
-  const [PostedBy, PostedBy] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
 
   const { id } = useParams();
 
@@ -28,7 +28,7 @@ const UpdateNotice = () => {
 
     setFileUrl(data.FileUrl);
 
-    setPostedBy(data.PostedBy);
+    setTeacherID(data.TeacherID);
   };
 
   const [load, setload] = useState(false);
@@ -47,7 +47,7 @@ const UpdateNotice = () => {
 
       FileUrl: FileUrl,
 
-      PostedBy: PostedBy,
+      TeacherID: TeacherID,
     };
 
     console.log(data);
@@ -192,13 +192,13 @@ const UpdateNotice = () => {
 
                         <div className="col-xl-8 my-2">
                           <input
-                            name="PostedBy"
-                            value={PostedBy}
+                            name="TeacherID"
+                            value={TeacherID}
                             onChange={(e) => {
-                              setPostedBy(e.target.value);
+                              setTeacherID(e.target.value);
                             }}
                             type="text"
-                            placeholder="PostedBy"
+                            placeholder="TeacherID"
                             className="contact_input"
                           />
                         </div>

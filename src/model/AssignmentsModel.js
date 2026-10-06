@@ -5,7 +5,7 @@ export class AssignmentsModel {
   Title = " ";
   Description = " ";
   image = "";
-
+  TeacherID = " ";
   DueDate = " ";
 
   createAt = new Date();

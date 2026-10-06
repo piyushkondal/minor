@@ -24,6 +24,7 @@ class GroupServices {
       obj.CategoryID = data.CategoryID;
       obj.Description = data.description;
       obj.image = data.image;
+      obj.TeacherID = data.TeacherID;
       await addDoc(collection(db, dbPath), { ...obj });
 
       return 1;
@@ -44,6 +45,7 @@ class GroupServices {
       obj.Description = data.description;
       obj.CategoryID = data.CategoryID;
       obj.image = data.image;
+      obj.TeacherID = data.TeacherID;
       await updateDoc(doc(db, dbPath, id), { ...obj });
 
       return 1;

@@ -22,6 +22,7 @@ class AssignmentServices {
       obj.SubjectName = data.SubjectName;
       obj.Title = data.Title;
       obj.Description = data.Description;
+      obj.TeacherID = data.TeacherID;
       obj.image = data.image;
       obj.DueDate = data.DueDate;
 
@@ -48,6 +49,7 @@ class AssignmentServices {
       obj.SubjectName = data.SubjectName;
       obj.Title = data.Title;
       obj.Description = data.Description;
+      obj.TeacherID = data.TeacherID;
       obj.FileUrl = data.FileUrl;
 
       await updateDoc(doc(db, dbPath, id), { ...obj });

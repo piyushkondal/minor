@@ -11,6 +11,7 @@ const AddAssignment = () => {
   const [SubjectName, setSubjectName] = useState("");
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
   const [image, setimage] = useState("");
   const [DueDate, setDueDate] = useState("");
 
@@ -37,6 +38,7 @@ const AddAssignment = () => {
       SubjectName: SubjectName,
       Title: Title,
       Description: Description,
+      TeacherID: TeacherID,
       image: url,
       DueDate: DueDate,
     };
@@ -204,6 +206,18 @@ const AddAssignment = () => {
                                 value={DueDate}
                                 onChange={(e) => {
                                   setDueDate(e.target.value);
+                                }}
+                                type="text"
+                                placeholder="DueDate"
+                                className="contact_input"
+                              />
+                            </div>
+                            <div className="col-xl-8 my-2">
+                              <input
+                                name="TeacherID"
+                                value={TeacherID}
+                                onChange={(e) => {
+                                  setTeacherID(e.target.value);
                                 }}
                                 type="text"
                                 placeholder="DueDate"
