@@ -81,10 +81,12 @@ export default function Description() {
         <div className="banner-left">
           {announcements.length > 0 ? (
             announcements.map((el, index) => (
-              <div key={el.id || index} className="announcement-item">
-                <span className="banner-badge">Announcement</span>
-                <h2 className="banner-left-title">{el.Title}</h2>
-                <p className="banner-left-desc">{el.Description}</p>
+              <div className="banner-left1">
+                <div key={el.id || index} className="announcement-item">
+                  <span className="banner-badge">Announcement</span>
+                  <h2 className="banner-left-title">{el.Title}</h2>
+                  <p className="banner-left-desc">{el.Description}</p>
+                </div>
               </div>
             ))
           ) : (
@@ -96,28 +98,30 @@ export default function Description() {
         <div className="banner-right">
           {materials.length > 0 ? (
             materials.map((item, index) => (
-              <div key={item.id || index} className="material-item">
-                <h3 className="banner-right-title">{item.Title}</h3>
-                <p className="banner-right-desc">{item.FileUrl}</p>
-                <a
-                  href={item.downloadUrl || "#"}
-                  className="download-button"
-                  download
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
+              <div className="banner-right1">
+                <div key={item.id || index} className="material-item">
+                  <h3 className="banner-right-title">{item.Title}</h3>
+                  <p className="banner-right-desc">{item.FileUrl}</p>
+                  <a
+                    href={item.downloadUrl || "#"}
+                    className="download-button"
+                    download
                   >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  {item.buttonText || "Download"}
-                </a>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    {item.buttonText || "Download"}
+                  </a>
+                </div>
               </div>
             ))
           ) : (

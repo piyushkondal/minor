@@ -25,15 +25,15 @@ export default function ViewCategory() {
   // }, [])
 
   const FatchData = async () => {
-    const uid = AuthService.getUserId();
-    const d2 = UserServices.AccessUsers(uid);
-    setUsers(d2);
-    const course = users.Course;
-    console.log(course);
+    // const uid = AuthService.getUserId();
+    // const d2 = UserServices.AccessUsers(uid);
+    // setUsers(d2);
+    // const course = users.Course;
+    // console.log(course);
 
-    let value = course;
+    // let value = course;
 
-    const data2 = await CategoryServices.All(value, "CategoryName");
+    const data2 = await CategoryServices.All();
 
     setData2(data2);
   };

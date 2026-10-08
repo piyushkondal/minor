@@ -220,7 +220,7 @@ const AddAssignment = () => {
                                   setTeacherID(e.target.value);
                                 }}
                                 type="text"
-                                placeholder="DueDate"
+                                placeholder="TeacherID"
                                 className="contact_input"
                               />
                             </div>

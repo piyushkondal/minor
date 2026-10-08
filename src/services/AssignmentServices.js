@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  where,
   query,
   updateDoc,
 } from "firebase/firestore";
@@ -63,9 +64,30 @@ class AssignmentServices {
     //console.log(data);
   }
 
-  async All() {
+  // async All() {
+  //   try {
+  //     let AssignmentDocs = await getDocs(collection(db, dbPath));
+  //     let AssignmentData = AssignmentDocs.docs.map((el) => {
+  //       return { id: el.id, ...el.data() };
+  //     });
+
+  //     return AssignmentData;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  async All(payload, key) {
     try {
-      let AssignmentDocs = await getDocs(collection(db, dbPath));
+      let AssignmentDocs = null;
+
+      if (!!payload) {
+        AssignmentDocs = await getDocs(
+          query(collection(db, dbPath), where(key, "==", payload.value)),
+        );
+      } else {
+        AssignmentDocs = await getDocs(collection(db, dbPath));
+      }
       let AssignmentData = AssignmentDocs.docs.map((el) => {
         return { id: el.id, ...el.data() };
       });

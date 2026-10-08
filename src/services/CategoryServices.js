@@ -53,17 +53,17 @@ class CategoryServices {
     //console.log(data);
   }
 
-  async All(value, key) {
+  async All() {
     try {
       let catDocs = null;
 
-      if (!!value) {
-        catDocs = await getDocs(
-          query(collection(db, dbPath), where(key, "==", value)),
-        );
-      } else {
-        catDocs = await getDocs(collection(db, dbPath));
-      }
+      // if (!!value) {
+      //   catDocs = await getDocs(
+      //     query(collection(db, dbPath), where(key, "==", value)),
+      //   );
+      // } else {
+      catDocs = await getDocs(collection(db, dbPath));
+      // }
 
       let catData = catDocs.docs.map((el) => {
         return { id: el.id, ...el.data() };

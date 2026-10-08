@@ -9,13 +9,32 @@
   flex-direction: row;
   width: 100%;
   gap: 16px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
     sans-serif;
 }
 
 /* Left Announcement Panel (75% Width) */
 .banner-left {
   width: calc(75% - 12px);
+  background-color: #fdfcfa;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #fdfcfa;
+}
+
+.banner-left1 {
+  width: calc(100% - 12px);
+  margin-bottom: 10px;
   background-color: #f2d325;
   padding: 32px;
   display: flex;
@@ -58,8 +77,23 @@
 /* Right Download Panel (25% Width) */
 .banner-right {
   width: calc(25% - 4px);
+  background-color: #fcfcfb;
+  color: #ffffff;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.banner-right1 {
+  width: calc(100% - 4px);
   background-color: #ec7225;
   color: #ffffff;
+  margin-bottom: 10px;
   padding: 32px;
   display: flex;
   flex-direction: column;

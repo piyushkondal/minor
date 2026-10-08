@@ -190,7 +190,7 @@ const AddNotice = () => {
                                   setTeacherID(e.target.value);
                                 }}
                                 type="text"
-                                placeholder="Posted by"
+                                placeholder="TeacherID"
                                 className="contact_input"
                               />
                             </div>
