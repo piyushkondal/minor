@@ -1,125 +1,102 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import AuthService from "./AuthService";
-import { UserModel } from "../model/UserModel";
-import { TeacherModel } from "../model/TeacherModel";
 
-const dbPath = "users";
+const USERS_PATH = "users";
 
 class UserServices {
   async Login(email, password) {
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      email.trim(),
+      password,
+    );
+
     try {
-      let userCreed = await signInWithEmailAndPassword(auth, email, password);
+      const uid = credential.user.uid;
+      const userSnapshot = await getDoc(doc(db, USERS_PATH, uid));
 
-      // signInWithEmailAndPassword(auth, email, password)
-
-      const uid = userCreed.user.uid;
-
-      let userDocs = await getDoc(doc(db, dbPath, uid));
-      const userData = userDocs.data();
-
-      AuthService.setData(userData, uid);
-
-      if (userData.userType == 1) {
-        return 1;
-      } else if (userData.userType == 2) {
-        return 2;
-      } else if (userData.userType == 3) {
-        return 3;
-      } else {
-        return 0;
+      if (!userSnapshot.exists()) {
+        throw new Error(
+          "Your account profile was not found. Contact the admin.",
+        );
       }
 
-      // console.log(userCreed.user.uid);
-      // getDoc
-    } catch (err) {
-      console.error(err);
+      const userData = userSnapshot.data();
+
+      if (![1, 2, 3].includes(Number(userData.userType))) {
+        throw new Error(
+          "Your account role is not configured. Contact the admin.",
+        );
+      }
+
+      if (userData.status === false) {
+        throw new Error("Your account is inactive. Contact the admin.");
+      }
+
+      AuthService.setData(userData, uid);
+      return Number(userData.userType);
+    } catch (error) {
+      await signOut(auth);
+      throw error;
     }
   }
 
   async Register(data) {
-    try {
-      let userCreed = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password,
-      );
-      let uid = userCreed.user.uid;
+    const credential = await createUserWithEmailAndPassword(
+      auth,
+      data.email.trim(),
+      data.password,
+    );
 
-      let obj = new UserModel();
-      obj.name = data.name;
-      obj.email = data.email;
-      obj.contact = data.contact;
-      obj.profile = data.profile;
-      obj.Course = data.Course;
+    const uid = credential.user.uid;
 
-      let data1 = { ...obj };
-      AuthService.setData(data1, uid);
+    // Store profile information in Firestore, NEVER the password.
+    const studentData = {
+      name: data.name.trim(),
+      email: data.email.trim(),
+      rollNumber: data.rollNumber.trim(),
+      contact: data.contact.trim(),
+      Course: data.Course.trim(),
+      profile: "",
+      userType: 2,
+      status: true,
+      createdAt: new Date(),
+    };
 
-      await setDoc(doc(db, dbPath, uid), data1);
+    // If this fails, surface the error rather than reporting a successful
+    // registration with a missing Firestore profile.
+    await setDoc(doc(db, USERS_PATH, uid), studentData);
 
-      return 1;
-    } catch (err) {
-      console.log(err);
-    }
+    AuthService.setData(studentData, uid);
+    return 2;
   }
-  async Register2(data) {
-    try {
-      let userCreed = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password,
-      );
-      let uid = userCreed.user.uid;
 
-      let obj = new TeacherModel();
-      obj.TeacherName = data.TeacherName;
-      obj.Email = data.email;
-      obj.Password = data.password;
-      obj.TeacherID = data.TeacherID;
-
-      let data1 = { ...obj };
-      AuthService.setData(data1, uid);
-
-      await setDoc(doc(db, dbPath, uid), data1);
-
-      return 1;
-    } catch (err) {
-      console.log(err);
-      return 0;
-    }
+  // Do not create teacher/admin accounts from a public browser method.
+  // Move privileged account creation to a trusted admin backend.
+  async Register2() {
+    throw new Error(
+      "Teacher accounts must be created through a trusted admin process.",
+    );
   }
 
   async AllUsers() {
-    try {
-      let alluser = await getDocs(collection(db, dbPath));
-
-      let userdata = alluser.docs.map((el) => {
-        return { id: el.id, ...el.data() };
-      });
-      return userdata;
-    } catch (error) {
-      console.log(error);
-    }
+    const snapshot = await getDocs(collection(db, USERS_PATH));
+    return snapshot.docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    }));
   }
 
   async AccessUsers(uid) {
-    try {
-      const userDoc = await getDoc(doc(db, "users", uid));
-      if (userDoc.exists()) {
-        return [userDoc.data()];
-      } else {
-        console.log("No such user!");
-        return [];
-      }
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+    const snapshot = await getDoc(doc(db, USERS_PATH, uid));
+    return snapshot.exists() ? [snapshot.data()] : [];
   }
 }
+
 export default new UserServices();

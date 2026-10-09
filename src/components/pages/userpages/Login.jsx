@@ -1,248 +1,140 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import UserServices from "/src/Services/UserServices";
 import { HashLoader } from "react-spinners";
+import UserServices from "/src/Services/UserServices";
+
+const ROUTES_BY_ROLE = {
+  1: "/admin",
+  2: "/",
+  3: "/teacher",
+};
+
+function getLoginError(error) {
+  if (error?.code === "auth/invalid-email") {
+    return "Enter a valid email address.";
+  }
+
+  if (
+    error?.code === "auth/invalid-credential" ||
+    error?.code === "auth/wrong-password" ||
+    error?.code === "auth/user-not-found"
+  ) {
+    return "Incorrect email or password.";
+  }
+
+  if (error?.code === "auth/too-many-requests") {
+    return "Too many attempts. Please try again later.";
+  }
+
+  return error?.message || "Unable to log in. Please try again.";
+}
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const [load, setload] = useState(false);
-  const nav = useNavigate();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setload(true);
-    console.log(email);
-    console.log(password);
+    if (loading) return;
+    setLoading(true);
 
     try {
-      let userType = await UserServices.Login(email, password);
-
-      if (userType == 1) {
-        toast.success("Login Successfully");
-
-        nav("/admin");
-      } else if (userType == 2) {
-        toast.success("User Login Successfully");
-        nav("/");
-      } else if (userType == 3) {
-        toast.success("Teacher Login Successfully");
-        nav("/teacher");
-      } else {
-        toast.error("Login Failed");
-      }
-
-      console.log(userType);
-    } catch (err) {
-      toast.error(err);
+      const role = await UserServices.Login(email, password);
+      toast.success("Welcome back!");
+      navigate(ROUTES_BY_ROLE[role], { replace: true });
+    } catch (error) {
+      toast.error(getLoginError(error));
     } finally {
-      setload(false);
+      setLoading(false);
     }
   };
 
   return (
     <>
-      {load ? (
+      <div className="home">
         <div
-          style={{
-            display: "flex",
-            height: "100vh",
-            width: "100vw",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            zIndex: 999,
-          }}
-        >
-          <HashLoader size={100} color="#f49522" />
+          className="home_background parallax_background parallax-window"
+          data-parallax="scroll"
+          data-image-src="/images/contact.jpg"
+          data-speed="0.8"
+        />
+        <div className="home_container">
+          <div className="container">
+            <div className="home_content text-center">
+              <div className="home_title">Sign in</div>
+              <p style={{ color: "#fff" }}>Access your course community</p>
+            </div>
+          </div>
         </div>
-      ) : (
-        <>
-          {/* Menu */}
-          <div className="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
-            <div className="menu_close_container">
-              <div className="menu_close">
-                <div />
-                <div />
-              </div>
-            </div>
-            <div className="search">
-              <form action="#" className="header_search_form menu_mm">
-                <input
-                  type="search"
-                  className="search_input menu_mm"
-                  placeholder="Search"
-                  required="required"
-                />
-                <button className="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-                  <i className="fa fa-search menu_mm" aria-hidden="true" />
-                </button>
-              </form>
-            </div>
-            <nav className="menu_nav">
-              <ul className="menu_mm">
-                <li className="menu_mm">
-                  <Link to="index.html">Home</Link>
-                </li>
-                <li className="menu_mm">
-                  <Link to="courses.html">Courses</Link>
-                </li>
-                <li className="menu_mm">
-                  <Link to="instructors.html">Instructors</Link>
-                </li>
-                <li className="menu_mm">
-                  <Link to="#">Events</Link>
-                </li>
-                <li className="menu_mm">
-                  <Link to="blog.html">Blog</Link>
-                </li>
-                <li className="menu_mm">
-                  <Link to="contact.html">Contact</Link>
-                </li>
-              </ul>
-            </nav>
-            <div className="menu_extra">
-              <div className="menu_phone">
-                <span className="menu_title">phone:</span>(009) 35475 6688933 32
-              </div>
-              <div className="menu_social">
-                <span className="menu_title">follow us</span>
-                <ul>
-                  <li>
-                    <Link to="#">
-                      <i className="fa fa-pinterest" aria-hidden="true" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#">
-                      <i className="fa fa-facebook" aria-hidden="true" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#">
-                      <i className="fa fa-instagram" aria-hidden="true" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#">
-                      <i className="fa fa-twitter" aria-hidden="true" />
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          {/* Home */}
-          <div className="home">
-            {/* Background image artist https://unsplash.com/@thepootphotographer */}
-            <div
-              className="home_background parallax_background parallax-window"
-              data-parallax="scroll"
-              data-image-src="/images/contact.jpg"
-              data-speed="0.8"
-            />
-            <div className="home_container">
-              <div className="container">
-                <div className="row justify-content-center ">
-                  <div className="col">
-                    <div className="home_content text-center">
-                      <div className="home_title">Login</div>
-                      <div className="breadcrumbs">
-                        <ul>
-                          <li>
-                            <Link to="index.html">Home</Link>
-                          </li>
-                          <li>Contact</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
 
-          <div className="contact">
-            <div className="container-fluid">
-              <div className="row row-xl-eq-height">
-                {/* Contact Content */}
-                <div className="col-xl-12">
-                  <div className="contact_content d-flex justify-content-center">
-                    <div className="row">
-                      {/* <div className="col-xl-6">
-              <div className="contact_about">
-                <div className="logo_container">
-                  <a href="#">
-                    <div className="logo_content d-flex flex-row align-items-end justify-content-start">
-                      
-            
-                    </div>
-                  </a>
-                </div>
-              
-              </div>
-            </div> */}
-                    </div>
-                    <div className="contact_form_container">
-                      <form
-                        onSubmit={handleSubmit}
-                        id="contact_form"
-                        className="contact_form"
-                      >
-                        <div>
-                          <div className="row">
-                            <div className="col-lg-12 contact_name_col mb-4">
-                              <input
-                                type="email"
-                                className="contact_input"
-                                placeholder="Email"
-                                required="required"
-                                value={email}
-                                onChange={(e) => {
-                                  setEmail(e.target.value);
-                                }}
-                              />
-                            </div>
-                            <div className="col-lg-12">
-                              <input
-                                type="password"
-                                className="contact_input"
-                                placeholder="password"
-                                required="required"
-                                value={password}
-                                onChange={(e) => {
-                                  setPassword(e.target.value);
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
+      <main className="contact">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-8 col-lg-5">
+              <div className="contact_form_container">
+                <h2 className="text-center mb-3">Welcome back</h2>
+                <p className="text-center mb-4">
+                  Students, teachers, and admins can sign in here.
+                </p>
 
-                        <div className="d-flex justify-content-center">
-                          <button className="contact_button">
-                            <span>Login</span>
-                            <span className="button_arrow">
-                              <i
-                                className="fa fa-angle-right"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                <form onSubmit={handleSubmit} className="contact_form">
+                  <div className="mb-3">
+                    <label htmlFor="login-email">Email address</label>
+                    <input
+                      id="login-email"
+                      className="contact_input"
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                \
+
+                  <div className="mb-4">
+                    <label htmlFor="login-password">Password</label>
+                    <input
+                      id="login-password"
+                      className="contact_input"
+                      type="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      className="contact_button"
+                      disabled={loading}
+                      aria-busy={loading}
+                    >
+                      {loading ? (
+                        <HashLoader size={22} color="#ffffff" />
+                      ) : (
+                        "Sign in"
+                      )}
+                    </button>
+                  </div>
+                </form>
+
+                <p className="text-center mt-4">
+                  New student? <Link to="/register">Create an account</Link>
+                </p>
               </div>
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </main>
     </>
   );
 };
+
 export default Login;
