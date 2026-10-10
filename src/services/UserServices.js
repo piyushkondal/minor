@@ -9,6 +9,9 @@ import AuthService from "./AuthService";
 
 const USERS_PATH = "users";
 
+// Change this if your backend uses another URL or port.
+const API_BASE_URL = " http://localhost:5175/api/auth";
+
 class UserServices {
   async Login(email, password) {
     const credential = await signInWithEmailAndPassword(
@@ -47,6 +50,49 @@ class UserServices {
     }
   }
 
+  // Send a six-digit OTP to the student's email.
+  async sendRegistrationOtp(email) {
+    const response = await fetch(`${API_BASE_URL}/send-registration-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+      }),
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.message || "Unable to send OTP.");
+    }
+
+    return result;
+  }
+
+  // Verify the OTP entered by the student.
+  async verifyRegistrationOtp(email, otp) {
+    const response = await fetch(`${API_BASE_URL}/verify-registration-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+        otp: otp.trim(),
+      }),
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.message || "Invalid or expired OTP.");
+    }
+
+    return result;
+  }
+
   async Register(data) {
     const credential = await createUserWithEmailAndPassword(
       auth,
@@ -61,7 +107,7 @@ class UserServices {
       name: data.name.trim(),
       email: data.email.trim(),
       rollNumber: data.rollNumber.trim(),
-      contact: data.contact.trim(),
+      contact: data.contact?.trim() || "",
       Course: data.Course.trim(),
       profile: "",
       userType: 2,
@@ -69,8 +115,6 @@ class UserServices {
       createdAt: new Date(),
     };
 
-    // If this fails, surface the error rather than reporting a successful
-    // registration with a missing Firestore profile.
     await setDoc(doc(db, USERS_PATH, uid), studentData);
 
     AuthService.setData(studentData, uid);
@@ -78,7 +122,6 @@ class UserServices {
   }
 
   // Do not create teacher/admin accounts from a public browser method.
-  // Move privileged account creation to a trusted admin backend.
   async Register2() {
     throw new Error(
       "Teacher accounts must be created through a trusted admin process.",
@@ -87,6 +130,7 @@ class UserServices {
 
   async AllUsers() {
     const snapshot = await getDocs(collection(db, USERS_PATH));
+
     return snapshot.docs.map((item) => ({
       id: item.id,
       ...item.data(),
@@ -95,6 +139,7 @@ class UserServices {
 
   async AccessUsers(uid) {
     const snapshot = await getDoc(doc(db, USERS_PATH, uid));
+
     return snapshot.exists() ? [snapshot.data()] : [];
   }
 }

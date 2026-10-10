@@ -85,15 +85,15 @@ class CategoryServices {
     }
   }
 
-  async all1() {
-    try {
-      const categoriesSnap = await getDocs(collection(db, "categories"));
-      const categoriesCount = categorySnap.size;
-      return categoriesCount;
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // async all1() {
+  //   try {
+  //     const categoriesSnap = await getDocs(collection(db, "categories"));
+  //     const categoriesCount = categoriesSnap.size;
+  //     return categoriesCount;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   async single(id) {
     try {

@@ -205,6 +205,22 @@ const Register = () => {
                         required
                       />
                     </div>
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="Profile-Pic">PROFILE PIC</label>
+                      <input
+                        name=""
+                        onChange={(e) => {
+                          setimage(e.target.files[0]);
+                        }}
+                        id="email"
+                        type="file"
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter category name'"
+                        placeholder="Email"
+                        className="contact_input"
+                        required="required"
+                      />
+                    </div>
                   </div>
 
                   <div className="d-flex justify-content-center">

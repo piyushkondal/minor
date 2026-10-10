@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import CategoryServices from "./../../../Services/CategoryServices";
+import { db } from "../../../firebase";
 // import { db } from "..../firebase";
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -15,14 +16,15 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         // Fetch categories
-        const Csize = CategoryServices.all1();
+        const categoriesSnap = await getDocs(collection(db, "categoires"));
+        const categoriesCount = categoriesSnap.size;
         // Fetch packages
         const groupsSnap = await getDocs(collection(db, "groups"));
-        const groupsCount = GroupSnap.size;
+        const groupsCount = groupsSnap.size;
 
         // Fetch hiddengems
         const StudentSnap = await getDocs(collection(db, "Student"));
-        const StudentCount = studentSnap.size;
+        const StudentCount = StudentSnap.size;
 
         // Fetch users
         const TeacherSnap = await getDocs(collection(db, "Teacher"));
@@ -31,7 +33,7 @@ const Dashboard = () => {
         // Fetch bookings
 
         setStats({
-          categories: Csize,
+          categories: categoriesCount,
           groups: groupsCount,
           Student: StudentCount,
           Teacher: TeacherCount,
@@ -74,10 +76,10 @@ const Dashboard = () => {
             marginBottom: "40px",
           }}
         >
-          <DashboardCard title="Categories" value={stats.categories} />
-          <DashboardCard title="Packages" value={stats.groups} />
-          <DashboardCard title="Hidden Gems" value={stats.Student} />
-          <DashboardCard title="Users Registered" value={stats.Teacher} />
+          <DashboardCard title="categories" value={stats.categories} />
+          <DashboardCard title="groups" value={stats.groups} />
+          <DashboardCard title="Student" value={stats.Student} />
+          <DashboardCard title="Teacher" value={stats.Teacher} />
         </div>
 
         {/* Quick Links */}

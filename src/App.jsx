@@ -48,6 +48,7 @@ import ManageAssignment from "./components/pages/teacherpages/ManageAssignment";
 import UpdateAssignment from "./components/pages/teacherpages/UpdateAssignment";
 import UpdateMaterial from "./components/pages/teacherpages/UpdateMaterial";
 import UpdatePyq from "./components/pages/teacherpages/UpdatePyq";
+import VerifyRegistrationOtp from "./components/pages/userpages/VerifyRegistrationOtp";
 
 function App() {
   return (
@@ -63,6 +64,10 @@ function App() {
 
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+            <Route
+              path="/VerifyRegistrationOtp"
+              element={<VerifyRegistrationOtp />}
+            ></Route>
             <Route path="/groupdetail" element={<GroupDetail />}></Route>
             <Route path="/userprofile/" element={<UserProfile />}></Route>
             <Route path="/addsubmission/" element={<AddSubmission />}></Route>

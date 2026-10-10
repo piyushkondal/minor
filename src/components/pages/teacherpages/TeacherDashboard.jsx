@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
+import { db } from "../../../firebase";
 // import { db } from "../firebase";
 
 const TeacherDashboard = () => {
@@ -16,15 +17,15 @@ const TeacherDashboard = () => {
       try {
         // Fetch categories
         const categoriesSnap = await getDocs(collection(db, "categories"));
-        const categoriesCount = categorySnap.size;
+        const categoriesCount = categoriesSnap.size;
 
         // Fetch packages
         const groupsSnap = await getDocs(collection(db, "groups"));
-        const groupsCount = GroupSnap.size;
+        const groupsCount = groupsSnap.size;
 
         // Fetch hiddengems
         const StudentSnap = await getDocs(collection(db, "Student"));
-        const StudentCount = studentSnap.size;
+        const StudentCount = StudentSnap.size;
 
         // Fetch users
         const TeacherSnap = await getDocs(collection(db, "Teacher"));
