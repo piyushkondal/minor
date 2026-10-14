@@ -85,9 +85,6 @@ function UserHeader() {
                         </li>
 
                         <li>
-                          <Link to="/register">register</Link>
-                        </li>
-                        <li>
                           <Link to="/userprofile">User Profile</Link>
                         </li>
 

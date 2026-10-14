@@ -207,6 +207,7 @@ const Register = () => {
                     </div>
                     <div className="col-md-6 mb-3">
                       <label htmlFor="Profile-Pic">PROFILE PIC</label>
+
                       <input
                         name=""
                         onChange={(e) => {

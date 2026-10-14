@@ -199,8 +199,8 @@ const ManageMaterial = () => {
                   className="row row-xl-8"
                   className="row justify-content-center"
                 >
-                  <table class="table">
-                    <thead>
+                  <table className="table table-bordered table-hover align-middle">
+                    <thead className="table-dark">
                       <tr>
                         <th scope="col">Sno</th>
                         <th scope="col">MaterialID</th>
@@ -225,7 +225,6 @@ const ManageMaterial = () => {
                               <td>{el.Title}</td>
                               <td>{el.FileUrl}</td>
                               <td>{el.TeacherID}</td>
-
                               <td>
                                 <Link
                                   class="btn btn-primary"
@@ -233,8 +232,9 @@ const ManageMaterial = () => {
                                 >
                                   Update
                                 </Link>{" "}
-                              </td>
+                              </td>{" "}
                               <td>
+                                {" "}
                                 <button
                                   onClick={() => {
                                     DeleteMaterial(el.id);
@@ -244,7 +244,6 @@ const ManageMaterial = () => {
                                   Delete{" "}
                                 </button>
                               </td>
-                              <td></td>
                               <td>{el.UpdateAt?.toDate().toLocaleString()}</td>
                             </tr>
                           </>

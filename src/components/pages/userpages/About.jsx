@@ -1,526 +1,222 @@
 import { Link } from "react-router-dom";
 
+const features = [
+  {
+    icon: "fa-users",
+    title: "Course-based groups",
+    description:
+      "Students are connected to the group for their university course, giving them one place to communicate and stay up to date.",
+  },
+  {
+    icon: "fa-bullhorn",
+    title: "Teacher announcements",
+    description:
+      "Teachers can share important notices and updates with the students in their course group.",
+  },
+  {
+    icon: "fa-book",
+    title: "Learning materials",
+    description:
+      "Course materials and assignments can be shared with students through their group.",
+  },
+  {
+    icon: "fa-cogs",
+    title: "Centralized administration",
+    description:
+      "Administrators manage courses, groups, students, and teachers from a dedicated panel.",
+  },
+];
+
+const roles = [
+  {
+    title: "Students",
+    description:
+      "After logging in, students can access the group associated with their course and view relevant notices, materials, and assignments.",
+    icon: "fa-graduation-cap",
+  },
+  {
+    title: "Teachers",
+    description:
+      "Teachers can use their panel to communicate course updates and share learning resources with their students.",
+    icon: "fa-chalkboard-teacher",
+  },
+  {
+    title: "Administrators",
+    description:
+      "Administrators oversee the platform’s courses, groups, student accounts, and teacher accounts.",
+    icon: "fa-user-cog",
+  },
+];
+
 export default function About() {
   return (
-    <>
-      <div className="super_container">
-        {/* Menu */}
-        <div className="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
-          <div className="menu_close_container">
-            <div className="menu_close">
-              <div />
-              <div />
-            </div>
-          </div>
-          <div className="search">
-            <form action="#" className="header_search_form menu_mm">
-              <input
-                type="search"
-                className="search_input menu_mm"
-                placeholder="Search"
-                required="required"
-              />
-              <button className="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-                <i className="fa fa-search menu_mm" aria-hidden="true" />
-              </button>
-            </form>
-          </div>
-          <nav className="menu_nav">
-            <ul className="menu_mm">
-              <li className="menu_mm">
-                <Link to="index.html">Home</Link>
-              </li>
-              <li className="menu_mm">
-                <Link to="courses.html">Courses</Link>
-              </li>
-              <li className="menu_mm">
-                <Link to="instructors.html">Instructors</Link>
-              </li>
-              <li className="menu_mm">
-                <Link to="#">Events</Link>
-              </li>
-              <li className="menu_mm">
-                <Link to="blog.html">Blog</Link>
-              </li>
-              <li className="menu_mm">
-                <Link to="contact.html">Contact</Link>
-              </li>
-            </ul>
-          </nav>
-          <div className="menu_extra">
-            <div className="menu_phone">
-              <span className="menu_title">phone:</span>(009) 35475
-            </div>
-            <div className="menu_social">
-              <span className="menu_title">follow us</span>
-              <ul>
-                <li>
-                  <Link to="#">
-                    <i className="fa fa-pinterest" aria-hidden="true" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#">
-                    <i className="fa fa-facebook" aria-hidden="true" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#">
-                    <i className="fa fa-instagram" aria-hidden="true" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#">
-                    <i className="fa fa-twitter" aria-hidden="true" />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        {/* Home */}
-        <div className="home">
-          {/* Background image artist https://unsplash.com/@thepootphotographer */}
-          <div
-            className="home_background parallax_background parallax-window"
-            data-parallax="scroll"
-            data-image-src="/images/about.jpg"
-            data-speed="0.8"
-          />
-          <div className="home_container">
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="home_content text-center">
-                    <div className="home_title">About us</div>
-                    <div className="breadcrumbs">
-                      <ul>
-                        <li>
-                          <Link to="index.html">Home</Link>
-                        </li>
-                        <li>About us</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* About */}
-        <div className="about">
-          <div className="container">
-            <div className="row about_row row-lg-eq-height">
-              <div className="col-lg-6">
-                <div className="about_content">
-                  <div className="about_title">Our Platform's main goal</div>
-                  <div className="about_text">
-                    <p>
-                      Suspendisse tincidunt magna eget massa hendrerit
-                      efficitur. Ut euismod pellentesque imperdiet. Cras laoreet
-                      gravida lectus, at viverra lorem venenatis in. Aenean id
-                      varius quam. Nullam bibendum interdum dui, ac tempor lorem
-                      convallis ut. Maecenas rutrum viverra sapien sed
-                      fermentum. Morbi tempor odio eget lacus tempus pulvinar.
-                      Praesent vel nisl fermentum, gravida augue. Lorem ipsum
-                      dolor sit amet, consectetur adipiscing elit. Integer id
-                      convallis libero, sed blandit nibh. Nam ultricies
-                      tristique nibh, consequat ornare nibh. Quisque vitae odio
-                      ligula.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="about_image">
-                  <img
-                    src="images/about_1.jpg"
-                    alt="https://unsplash.com/@jtylernix"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row about_row row-lg-eq-height">
-              <div className="col-lg-6 order-lg-1 order-2">
-                <div className="about_image">
-                  <img src="images/about_1.jpg" alt="" />
-                </div>
-              </div>
-              <div className="col-lg-6 order-lg-2 order-1">
-                <div className="about_content">
-                  <div className="about_title">eLearn's Vision</div>
-                  <div className="about_text">
-                    <p>
-                      Suspendisse tincidunt magna eget massa hendrerit
-                      efficitur. Ut euismod pellentesque imperdiet. Cras laoreet
-                      gravida lectus, at viverra lorem venenatis in. Aenean id
-                      varius quam. Nullam bibendum interdum dui, ac tempor lorem
-                      convallis ut. Maecenas rutrum viverra sapien sed
-                      fermentum. Morbi tempor odio eget lacus tempus pulvinar.
-                      Praesent vel nisl fermentum, gravida augue. Lorem ipsum
-                      dolor sit amet, consectetur adipiscing elit. Integer id
-                      convallis libero, sed blandit nibh. Nam ultricies
-                      tristique nibh.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Milestones */}
-        <div className="milestones">
-          {/* Background image artis https://unsplash.com/@thepootphotographer */}
-          <div
-            className="parallax_background parallax-window"
-            data-parallax="scroll"
-            data-image-src="images/milestones.jpg"
-            data-speed="0.8"
-          />
-          <div className="container">
-            <div className="row milestones_container">
-              {/* Milestone */}
-              <div className="col-lg-3 milestone_col">
-                <div className="milestone text-center">
-                  <div className="milestone_icon">
-                    <img src="images/milestone_1.svg" alt="" />
-                  </div>
-                  <div className="milestone_counter" data-end-value={1548}>
-                    0
-                  </div>
-                  <div className="milestone_text">Online Courses</div>
-                </div>
-              </div>
-              {/* Milestone */}
-              <div className="col-lg-3 milestone_col">
-                <div className="milestone text-center">
-                  <div className="milestone_icon">
-                    <img src="images/milestone_2.svg" alt="" />
-                  </div>
-                  <div className="milestone_counter" data-end-value={7286}>
-                    0
-                  </div>
-                  <div className="milestone_text">Students</div>
-                </div>
-              </div>
-              {/* Milestone */}
-              <div className="col-lg-3 milestone_col">
-                <div className="milestone text-center">
-                  <div className="milestone_icon">
-                    <img src="images/milestone_3.svg" alt="" />
-                  </div>
-                  <div className="milestone_counter" data-end-value={257}>
-                    0
-                  </div>
-                  <div className="milestone_text">Teachers</div>
-                </div>
-              </div>
-              {/* Milestone */}
-              <div className="col-lg-3 milestone_col">
-                <div className="milestone text-center">
-                  <div className="milestone_icon">
-                    <img src="images/milestone_4.svg" alt="" />
-                  </div>
-                  <div className="milestone_counter" data-end-value={39}>
-                    0
-                  </div>
-                  <div className="milestone_text">Countries</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Teachers */}
-        <div className="teachers">
+    <div className="super_container">
+      {/* Page banner */}
+      <section className="home">
+        <div
+          className="home_background"
+          style={{
+            backgroundImage: "url('/images/about.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          role="img"
+          aria-label="Students learning together"
+        />
+        <div className="home_container">
           <div className="container">
             <div className="row">
               <div className="col">
-                <div className="teachers_title text-center">
-                  Meet the Teachers
-                </div>
-              </div>
-            </div>
-            <div className="row teachers_row">
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_1.jpg"
-                      alt="https://unsplash.com/@nickkarvounis"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Jonathan Smith</Link>
-                    </div>
-                    <div className="teacher_subtitle">Marketing</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_2.jpg"
-                      alt="https://unsplash.com/@rawpixel"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Michelle Williams</Link>
-                    </div>
-                    <div className="teacher_subtitle">Art &amp; Design</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_3.jpg"
-                      alt="https://unsplash.com/@taylor_grote"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Jack Gallagan</Link>
-                    </div>
-                    <div className="teacher_subtitle">Marketing</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_4.jpg"
-                      alt="https://unsplash.com/@benjaminrobyn"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Christinne Smith</Link>
-                    </div>
-                    <div className="teacher_subtitle">Marketing</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_5.jpg"
-                      alt="https://unsplash.com/@christinhumephoto"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Michelle Williams</Link>
-                    </div>
-                    <div className="teacher_subtitle">Art &amp; Design</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Teacher */}
-              <div className="col-lg-4 col-md-6">
-                <div className="teacher">
-                  <div className="teacher_image">
-                    <img
-                      src="images/teacher_6.jpg"
-                      alt="https://unsplash.com/@rawpixel"
-                    />
-                  </div>
-                  <div className="teacher_body text-center">
-                    <div className="teacher_title">
-                      <Link to="#">Jack Gallagan</Link>
-                    </div>
-                    <div className="teacher_subtitle">Marketing</div>
-                    <div className="teacher_social">
-                      <ul>
-                        <li>
-                          <Link to="#">
-                            <i
-                              className="fa fa-google-plus"
-                              aria-hidden="true"
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-pinterest" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-facebook" aria-hidden="true" />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#">
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col text-center">
-                <div className="button teachers_button">
-                  <Link to="#">
-                    see all teachers
-                    <div className="button_arrow">
-                      <i className="fa fa-angle-right" aria-hidden="true" />
-                    </div>
-                  </Link>
+                <div className="home_content text-center">
+                  <h1 className="home_title">About CourseConnect</h1>
+                  <nav className="breadcrumbs" aria-label="Breadcrumb">
+                    <ul>
+                      <li>
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li aria-current="page">About us</li>
+                    </ul>
+                  </nav>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </section>
+
+      {/* Project introduction */}
+      <section className="about py-5">
+        <div className="container">
+          <div className="row about_row align-items-center">
+            <div className="col-lg-6">
+              <div className="about_content">
+                <h2 className="about_title">
+                  A connected learning space for every course
+                </h2>
+                <div className="about_text">
+                  <p>
+                    CourseConnect is a university learning communication
+                    platform designed to bring students and teachers together in
+                    course-based groups. It gives each course a shared online
+                    space where important updates and learning resources can be
+                    organized and accessed.
+                  </p>
+                  <p>
+                    Students sign in to access the group associated with their
+                    course. Teachers can share announcements, materials, and
+                    assignments, while administrators manage courses, groups,
+                    students, and teachers through their panel.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-6 mt-4 mt-lg-0">
+              <div className="p-4 p-md-5 border rounded h-100">
+                <h3 className="mb-3">Our project goal</h3>
+                <p className="mb-0">
+                  Our goal is to make course communication more organized and
+                  accessible by keeping students, teachers, and course
+                  information connected in one platform.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform features */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="row mb-4">
+            <div className="col text-center">
+              <h2 className="teachers_title">What the platform offers</h2>
+              <p className="mt-3">
+                Tools to support communication and course coordination.
+              </p>
+            </div>
+          </div>
+
+          <div className="row">
+            {features.map((feature) => (
+              <div className="col-md-6 col-lg-3 mb-4" key={feature.title}>
+                <article className="p-4 border rounded bg-white h-100">
+                  <div className="mb-3" aria-hidden="true">
+                    <i className={`fa ${feature.icon} fa-2x`} />
+                  </div>
+                  <h3 className="h5">{feature.title}</h3>
+                  <p className="mb-0">{feature.description}</p>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* User roles */}
+      <section className="teachers py-5">
+        <div className="container">
+          <div className="row mb-4">
+            <div className="col text-center">
+              <h2 className="teachers_title">
+                Designed for the university community
+              </h2>
+              <p className="mt-3">
+                Each user has a role that supports the learning process.
+              </p>
+            </div>
+          </div>
+
+          <div className="row">
+            {roles.map((role) => (
+              <div className="col-md-4 mb-4" key={role.title}>
+                <article className="p-4 border rounded h-100 text-center">
+                  <div className="mb-3" aria-hidden="true">
+                    <i className={`fa ${role.icon} fa-2x`} />
+                  </div>
+                  <h3 className="h5">{role.title}</h3>
+                  <p className="mb-0">{role.description}</p>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 mx-auto text-center">
+              <h2 className="about_title">How it works</h2>
+              <p className="mt-3">
+                Administrators set up courses and manage the people and groups
+                associated with them. Teachers share course information through
+                their panel. Students log in to access the group for their
+                course and keep up with relevant updates and resources.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to action */}
+      <section className="py-5">
+        <div className="container text-center">
+          <h2 className="about_title">
+            Learning works better when everyone is connected
+          </h2>
+          <p className="mt-3">
+            CourseConnect brings course communication and resources together in
+            one dedicated space.
+          </p>
+          <div className="mt-4">
+            <Link to="/ViewCategory" className="btn btn-primary">
+              Explore courses
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

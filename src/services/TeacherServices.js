@@ -4,7 +4,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDocs,
+  getDoc,
   query,
   updateDoc,
 } from "firebase/firestore";
@@ -22,15 +22,16 @@ class TeacherServices {
     try {
       let userCreed = await createUserWithEmailAndPassword(
         auth,
-        data.email,
+        data.email.trim(),
         data.password,
       );
+
       let uid = userCreed.user.uid;
       let obj = new TeacherModel();
-      obj.TeacherName = data.TeacherName;
-      obj.TeacherID = data.TeacherId;
-      obj.Email = data.email;
-      obj.Password = data.password;
+      obj.TeacherName = data.TeacherName.trim();
+      obj.TeacherID = data.TeacherId.trim();
+      obj.Email = data.email.trim();
+      obj.Password = data.password.trim();
       await setDoc(doc(db, dbpath, uid), { ...obj });
 
       await setDoc(doc(db, "users", uid), { ...obj });
@@ -48,10 +49,10 @@ class TeacherServices {
 
     try {
       let Obj = new TeacherModel();
-      Obj.TeacherID = data.TeacherID;
-      Obj.TeacherName = data.TeacherName;
-      Obj.Email = data.email;
-      Obj.Password = data.password;
+      Obj.TeacherID = data.TeacherID.trim();
+      Obj.TeacherName = data.TeacherName.trim();
+      Obj.Email = data.email.trim();
+      Obj.Password = data.password.trim();
       await updateDoc(doc(db, dbpath, id), { ...Obj });
 
       return 1;
@@ -74,6 +75,11 @@ class TeacherServices {
     } catch (err) {
       console.log(err);
     }
+  }
+  async AccessTeacher(uid) {
+    const snapshot = await getDoc(doc(db, dbpath, uid));
+
+    return snapshot.exists() ? [snapshot.data()] : [];
   }
 
   async delete(id) {

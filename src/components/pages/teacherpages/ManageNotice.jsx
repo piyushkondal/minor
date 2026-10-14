@@ -197,8 +197,8 @@ const ManageNotice = () => {
                   className="row row-xl-8"
                   className="row justify-content-center"
                 >
-                  <table class="table">
-                    <thead>
+                  <table className="table table-bordered table-hover align-middle">
+                    <thead className="table-dark">
                       <tr>
                         <th scope="col">Sno</th>
                         <th scope="col">NoticeID</th>

@@ -1,90 +1,139 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import CategoryServices from "../../../services/CategoryServices";
 import AuthService from "../../../services/AuthService";
 import UserServices from "../../../services/UserServices";
 
 export default function ViewCategory() {
-  const [data, setData] = useState([]);
-  const [data2, setData2] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    FatchData();
+    let cancelled = false;
 
-    //  const fetchUsers = async () => {
-    // const userId = AuthService.getUserId();
-    // console.log("Current UID:", userId);
+    const FetchStudentCategory = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-    // if (userId) return;
+        // Get the currently logged-in student's UID
+        const uid = AuthService.getUserId();
 
-    // const data = await UserServices.AccessUsers(userId);
-    // console.log("Fetched users Data:", data);
-  });
-  // fetchUsers();
-  // }, [])
+        if (!uid) {
+          return;
+        }
 
-  const FatchData = async () => {
-    // const uid = AuthService.getUserId();
-    // const d2 = UserServices.AccessUsers(uid);
-    // setUsers(d2);
-    // const course = users.Course;
-    // console.log(course);
+        // Fetch the logged-in student's record
+        const userData = await UserServices.AccessUsers(uid);
 
-    // let value = course;
+        // Handle either an object or an array response
+        const student = Array.isArray(userData) ? userData[0] : userData;
 
-    const data2 = await CategoryServices.All();
+        if (!student) {
+          throw new Error("Student record not found.");
+        }
 
-    setData2(data2);
-  };
+        // Get the category/course assigned to this student
+        const studentCourse = student.Course;
+
+        if (!studentCourse) {
+          if (!cancelled) setCategories([]);
+          return;
+        }
+
+        // Fetch all categories
+        const allCategories = await CategoryServices.All();
+
+        // Match the student's assigned course/category
+        const matchedCategories = allCategories.filter((category) => {
+          return (
+            category.id === studentCourse ||
+            category.CategoryName === studentCourse
+          );
+        });
+
+        if (!cancelled) {
+          setCategories(matchedCategories);
+        }
+      } catch (err) {
+        console.error("Error fetching student category:", err);
+
+        if (!cancelled) {
+          setError("Unable to load your category. Please try again.");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    FetchStudentCategory();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Do not display categories to logged-out users
+  if (!AuthService.getUserId()) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (loading) {
+    return <div className="container my-5">Loading your category...</div>;
+  }
+
+  if (error) {
+    return <div className="container my-5 text-danger">{error}</div>;
+  }
 
   return (
-    <>
-      {/* {Array.isArray(users) && users.length >0 ? (
-  users.map((e) => ( */}
+    <div className="super_container">
+      <div className="courses">
+        <div className="container">
+          <h2 className="mb-4">My Category</h2>
 
-      <div className="super_container">
-        {/* Courses */}
-        <div className="courses">
-          <div className="container">
-            <div className="row courses_row">
-              {data2.map((el) => {
-                return (
-                  <>
-                    <div className="col-lg-4 col-md-6 ">
-                      <div className="course">
-                        <div className="course_image">
-                          <img
-                            src={el.image}
-                            alt=""
-                            style={{ height: "200px", width: "100%" }}
-                          />
-                        </div>
-                        <div className="course_body">
-                          <div className="course_header d-flex flex-row align-items-center justify-content-start"></div>
-                          <div className="course_title">
-                            <h3>
-                              <Link to={`/viewgroup/${el.id}`}>
-                                {el.CategoryName}
-                              </Link>
-                            </h3>
-                          </div>
-                          <div className="course_text">{el.Description}</div>
-                        </div>
-                      </div>
+          <div className="row courses_row">
+            {categories.length > 0 ? (
+              categories.map((el) => (
+                <div className="col-lg-4 col-md-6" key={el.id}>
+                  <div className="course">
+                    <div className="course_image">
+                      <img
+                        src={el.image}
+                        alt={el.CategoryName || "Category"}
+                        style={{
+                          height: "200px",
+                          width: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
                     </div>
-                  </>
-                );
-              })}
-            </div>
+
+                    <div className="course_body">
+                      <div className="course_title">
+                        <h3>
+                          <Link to={`/viewGroup/${el.id}`}>
+                            {el.CategoryName}
+                          </Link>
+                        </h3>
+                      </div>
+
+                      <div className="course_text">{el.Description}</div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-12">
+                <p>No category has been assigned to your account.</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {/* ))
- ): (
-    <p className="text-center text-muted">Please Wait</p>
-  )} */}
-    </>
+    </div>
   );
 }

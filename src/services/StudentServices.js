@@ -8,15 +8,11 @@ import { StudentModel } from "../model/StudentModel";
 import AuthService from "./AuthService";
 import { TeacherModel } from "../model/TeacherModel";
 
-const dbPath = "Student";
+const dbPath = "users";
 class StudentServices {
   async Login(email, password) {
     try {
-      let StudentCreed = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
+      let userCreed = await signInWithEmailAndPassword(auth, email, password);
 
       // signInWithEmailAndPassword(auth, email, password)
 

@@ -6,23 +6,64 @@ import TeacherServices from "../../../services/TeacherServices";
 
 export default function Groups() {
   const [Data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    FatchData();
+    let cancelled = false;
+
+    const fetchTeacherGroups = async () => {
+      try {
+        const uid = AuthService.getUserId();
+        if (!uid) throw new Error("No logged-in user found.");
+
+        const teacherData = await TeacherServices.AccessTeacher(uid);
+        const teacher = Array.isArray(teacherData)
+          ? teacherData[0]
+          : teacherData;
+
+        if (teacher?.TeacherID == null) {
+          throw new Error("Teacher record or ID not found.");
+        }
+
+        const allGroups = await GroupServices.All();
+        if (!Array.isArray(allGroups)) {
+          throw new Error("Expected a list of groups.");
+        }
+
+        const matchedGroups = allGroups.filter(
+          (group) =>
+            group.TeacherID != null &&
+            String(group.TeacherID) === String(teacher.TeacherID),
+        );
+
+        if (!cancelled) setData(matchedGroups);
+      } catch (err) {
+        console.error("Error fetching teacher groups:", err);
+        if (!cancelled) setError("Unable to load your groups.");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchTeacherGroups();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const FatchData = async () => {
-    let uid = await AuthService.getUserId();
-    let d2 = TeacherServices.single(uid);
-    let id = d2.TeacherID;
-    let payload = {
-      value: id,
-    };
-    console.log(d2);
-    let data = await GroupServices.All(payload, "TeacherID");
-
-    setData(data);
-  };
+  // Keep your existing return (...) below.
+  {
+    loading && <p>Loading groups...</p>;
+  }
+  {
+    error && <p>{error}</p>;
+  }
+  {
+    !loading && !error && Data.length === 0 && (
+      <p>No groups assigned to you.</p>
+    );
+  }
 
   return (
     <>
@@ -84,7 +125,9 @@ export default function Groups() {
                           <div className="course_header d-flex flex-row align-items-center justify-content-start"></div>
                           <div className="course_title">
                             <h3>
-                              <a href="courses.html">{el.CategoryName}</a>
+                              <Link to={`/description/${el.id}`}>
+                                {el.GroupName}
+                              </Link>
                             </h3>
                           </div>
                           <div className="course_text">{el.Description}</div>

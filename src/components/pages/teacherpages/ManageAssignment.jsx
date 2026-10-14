@@ -187,7 +187,7 @@ const ManageAssignment = () => {
                 <Link
                   class="btn btn-primary"
                   style={{
-                    backgroundColor: "#ff8a00",
+                    backgroundColor: "#f0850b",
                   }}
                   to={"/teacher/addAssignment/"}
                 >
@@ -197,8 +197,8 @@ const ManageAssignment = () => {
                   className="row row-xl-8"
                   className="row justify-content-center"
                 >
-                  <table class="table">
-                    <thead>
+                  <table className="table table-bordered table-hover align-middle">
+                    <thead className="table-dark">
                       <tr>
                         <th scope="col">Sno</th>
                         <th scope="col">AssignmentID</th>
@@ -238,7 +238,9 @@ const ManageAssignment = () => {
                                   Update
                                 </Link>{" "}
                               </td>
+
                               <td>
+                                {" "}
                                 <button
                                   onClick={() => {
                                     DeleteAssignment(el.id);
@@ -248,8 +250,6 @@ const ManageAssignment = () => {
                                   Delete{" "}
                                 </button>
                               </td>
-                              <td></td>
-                              <td></td>
                             </tr>
                           </>
                         );
